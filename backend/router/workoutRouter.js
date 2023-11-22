@@ -12,8 +12,8 @@ const {
 router.get("/", getAllWorkoutsController).post("/", createWorkoutController);
 
 router
-  .get("/:id(\\d+)", getSingleWorkoutController)
-  .delete("/:id(\\d+)", deleteWorkoutController)
-  .patch("/:id(\\d+)", updateWorkoutController);
+  .get("/:id", getSingleWorkoutController)
+  .delete("/:id", deleteWorkoutController)
+  .patch("/:id", updateWorkoutController);
 
 module.exports = router;
