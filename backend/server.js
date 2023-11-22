@@ -6,7 +6,7 @@ app.get('/',(req,res)=>{
     res.json({msg:"Get all workouts"})
 })
 
-app.get('/:id',(req,res)=>{
+app.get('/:id(\\d+)',(req,res)=>{
     res.json({msg:"Get single workout"})
 })
 
@@ -14,11 +14,11 @@ app.post('/',(req,res)=>{
     res.json({msg:"Create a new workout"})
 })
 
-app.delete('/:id',(req,res)=>{
+app.delete('/:id(\\d+)',(req,res)=>{
     res.json({msg:"Delete single workout"})
 })
 
-app.patch('/:id',(req,res)=>{
+app.patch('/:id(\\d+)',(req,res)=>{
     res.json({msg:"Update single workout"})
 })
 
