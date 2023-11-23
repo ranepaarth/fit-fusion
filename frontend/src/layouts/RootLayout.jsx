@@ -6,7 +6,7 @@ const RootLayout = () => {
   return (
     <>
       <Navbar />
-      <main className="px-[5%] lg:px-[10%] py-[5%]">
+      <main className="px-[5%] py-[5%]">
         <Outlet />
       </main>
     </>

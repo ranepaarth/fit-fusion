@@ -41,7 +41,7 @@ const WorkoutsForm = () => {
   }, []);
   return (
     <form
-      className="w-full md:w-[50%] xl:w-[40%] flex flex-col gap-y-2 capitalize sticky"
+      className="w-full md:w-[40%] flex flex-col gap-y-2 capitalize sticky"
       onSubmit={handleSubmit}
     >
       <h1 className="text-center text-2xl text-neutral-50">

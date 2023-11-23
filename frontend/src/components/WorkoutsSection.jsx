@@ -17,7 +17,7 @@ const WorkoutsSection = () => {
 
   return (
 
-    <section className="flex flex-col gap-4 w-full md:w-[60%] mt-8">
+    <section className="flex flex-col gap-4 w-full md:w-[50%] mt-8">
       {workouts?.map((workout) => {
           return <WorkoutCard workout={workout} key={workout._id}/>;
         })}

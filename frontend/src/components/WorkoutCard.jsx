@@ -1,6 +1,6 @@
+import moment from "moment";
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
-import moment from "moment";
 import WorkoutDetail from "../components/WorkoutCard/WorkoutDetail";
 import WorkoutTitle from "../components/WorkoutCard/WorkoutTitle";
 
@@ -14,14 +14,14 @@ const WorkoutCard = ({ workout }) => {
       >
         <MdDeleteForever className="text-red-600" />
       </span>
-      <div className="flex items-center justify-between text-neutral-600 mt-5">
+      <div className="flex md:flex-col xl:flex-row md:items-start items-center justify-between text-neutral-600 mt-5">
         <WorkoutDetail name={"Load (kg):"} value={workout?.load} />
         <WorkoutDetail name={"repetitions:"} value={workout?.reps} />
         <WorkoutDetail name={"sets:"} value={workout?.sets} />
-        <p className="text-neutral-400 text-base font-normal">
-          {moment(workout?.createdAt).format("DD-MM-YYYY HH:mm")}
-        </p>
       </div>
+      <p className="text-neutral-400 text-base font-normal">
+        {moment(workout?.createdAt).format("DD-MM-YYYY HH:mm")}
+      </p>
     </article>
   );
 };
