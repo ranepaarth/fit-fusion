@@ -6,7 +6,7 @@ import WorkoutTitle from "../components/WorkoutCard/WorkoutTitle";
 
 const WorkoutCard = ({ workout }) => {
   return (
-    <article className="bg-neutral-100 w-full py-2 px-4 rounded-md">
+    <article className="bg-neutral-100 w-full py-2 px-4 rounded-md relative">
       <WorkoutTitle title={workout?.title} />
       <span
         className="bg-red-200 absolute right-4 top-3 p-1 rounded-full border-red-500 border-2 hover:scale-105 cursor-pointer"
