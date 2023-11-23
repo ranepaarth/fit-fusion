@@ -4,7 +4,7 @@ const WorkoutsSection = () => {
   const [workouts, setWorkouts] = useState(null);
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch("http://localhost:4000/api/workout");
+      const response = await fetch("/api/workout");
       const data = await response.json();
 
       if (response.ok) setWorkouts(data);
@@ -14,7 +14,7 @@ const WorkoutsSection = () => {
   }, []);
 
   return (
-    <section className="flex flex-col gap-4 w-full mt-8">
+    <section className="flex flex-col gap-4 w-full md:w-[60%] mt-8">
       {workouts?.map((workout) => {
           return <WorkoutCard workout={workout} key={workout._id}/>;
         })}
