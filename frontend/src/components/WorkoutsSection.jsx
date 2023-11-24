@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import WorkoutCard from "./WorkoutCard";
+import React, { useEffect } from "react";
+import { WorkoutCard, useWorkoutContext } from "../componentsRoute";
 const WorkoutsSection = () => {
-  const [workouts, setWorkouts] = useState(null);
+  // const [workouts, setWorkouts] = useState(null);
+  const {workouts,fetchAllWorkouts} = useWorkoutContext()
   useEffect(() => {
     const fetchWorkouts = async () => {
 
@@ -9,7 +10,7 @@ const WorkoutsSection = () => {
 
       const data = await response.json();
 
-      if (response.ok) setWorkouts(data);
+      if (response.ok) fetchAllWorkouts(data)
     };
 
     fetchWorkouts();
