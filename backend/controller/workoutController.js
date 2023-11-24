@@ -36,7 +36,7 @@ const createWorkoutController = async (req, res) => {
     //Existing Workout with the same title
     if (error.keyValue?.title)
       res.status(400).json({
-        message: `${error.keyValue.title} workout already exists. Please try updating it.`,
+        error: `${error.keyValue.title} workout already exists. Please try updating it.`,
       });
       //Missing Workout Fields
     else res.status(400).json({ error: "All fields are required" });
@@ -78,13 +78,13 @@ const updateWorkoutController = async (req, res) => {
     //updating a workout title with an already existing title
     if (error.codeName === "DuplicateKey")
       res.status(400).json({
-        message:
+        error:
           "Workout with same title already exists. Please try updating it.",
       });
       //invalid id
     else if (error.kind === "ObjectId")
       res.status(404).json({
-        message: `Workout with id:${id} does not exist. Please try again with a valid id.`,
+        error: `Workout with id:${id} does not exist. Please try again with a valid id.`,
       });
     else console.log(error);
   }
