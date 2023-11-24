@@ -1,5 +1,7 @@
 import React from "react";
 import { FormInputLoads, FormInputReps, FormInputSets, FormInputTitle, FormWorkoutError, useWorkoutContext } from "../../componentsRoute";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const WorkoutsForm = () => {
   const {
@@ -11,6 +13,14 @@ const WorkoutsForm = () => {
     resetStates,
     fetchCreatedWorkout,
   } = useWorkoutContext();
+
+  const showToastMessage = () => {
+    toast.success(`Workout Created !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose:3000,
+      theme: 'colored'
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,9 +42,12 @@ const WorkoutsForm = () => {
       console.log(response);
     } else if (response.ok) {
       resetStates();
+      showToastMessage()
       fetchCreatedWorkout(data);
     }
   };
+
+
 
   return (
     <form
@@ -54,6 +67,7 @@ const WorkoutsForm = () => {
         <button className="p-3 w-fit bg-blue-500 rounded hover:bg-opacity-80">
           Add Workout
         </button>
+        <ToastContainer />
       </div>
 
       <FormWorkoutError />
