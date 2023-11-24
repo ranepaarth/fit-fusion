@@ -11,7 +11,7 @@ const WorkoutCreatedAt = ({ createdAt }) => {
   return (
     <span className="text-neutral-400 text-base font-normal flex items-center gap-1">
       <p>{formatter.format(Date.parse(createdAt))} at </p>
-      <p>{moment(createdAt).format("HH:mm")}</p>
+      <p>{moment(createdAt).format("hh:mm A")}</p>
     </span>
   );
 };
