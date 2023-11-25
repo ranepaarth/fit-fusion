@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useWorkoutContext } from "../../componentsRoute";
 
-const FormInputTitle = () => {
+const FormInputTitle = ({emptyFieldClass}) => {
+  console.log(emptyFieldClass)
   const { title, setTitle } = useWorkoutContext();
   const titleRef = useRef();
   useEffect(() => {
@@ -15,7 +16,7 @@ const FormInputTitle = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         ref={titleRef}
-        className="border-none outline-none bg-neutral-100 h-10 rounded-md text-blue-700 px-5 py-2 text-lg capitalize focus-within: outline-2 focus-within:outline-blue-600"
+        className={"outline-none bg-neutral-100 h-10 rounded-md text-blue-700 px-5 py-2 text-lg capitalize focus-within: outline-2 focus-within:outline-blue-600 focus-within:border-none " + emptyFieldClass}
       />
     </>
   );

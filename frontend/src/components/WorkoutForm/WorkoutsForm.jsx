@@ -11,6 +11,8 @@ const WorkoutsForm = () => {
     load,
     setError,
     resetStates,
+    setEmptyFields,
+    emptyFields,
     fetchCreatedWorkout,
   } = useWorkoutContext();
 
@@ -39,6 +41,7 @@ const WorkoutsForm = () => {
     //Same happens for an error response
     if (!response.ok) {
       setError(data.error);
+      setEmptyFields(data.emptyFields)
       console.log(response);
     } else if (response.ok) {
       resetStates();
@@ -47,7 +50,10 @@ const WorkoutsForm = () => {
     }
   };
 
-
+  const isEmptyField = (detail) => {
+    console.log(detail)
+    return emptyFields.includes(detail)
+  }
 
   return (
     <form
@@ -58,10 +64,10 @@ const WorkoutsForm = () => {
         Create A New Workout
       </h1>
 
-      <FormInputTitle />
-      <FormInputLoads />
-      <FormInputSets />
-      <FormInputReps />
+      <FormInputTitle emptyFieldClass={isEmptyField('title')?"border-2 border-red-500":'border-none'}/>
+      <FormInputLoads emptyFieldClass={isEmptyField('loads')?"border-2 border-red-500":'border-none'}/>
+      <FormInputSets emptyFieldClass={isEmptyField('sets')?"border-2 border-red-500":'border-none'}/>
+      <FormInputReps emptyFieldClass={isEmptyField('reps')?"border-2 border-red-500":'border-none'}/>
 
       <div className="flex justify-center mt-5">
         <button className="p-3 w-fit bg-blue-500 rounded hover:bg-opacity-80">
