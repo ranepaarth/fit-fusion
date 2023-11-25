@@ -33,6 +33,7 @@ export const WorkoutContextProvider = ({ children }) => {
   const [reps, setReps] = useState("");
   const [sets, setSets] = useState("");
   const [load, setLoad] = useState("");
+  const [emptyFields,setEmptyFields] = useState([]);
   const [error, setError] = useState(null);
 
   const fetchAllWorkouts = (workouts) => {
@@ -54,6 +55,7 @@ export const WorkoutContextProvider = ({ children }) => {
     setLoad("");
     setSets("");
     setReps("");
+    setEmptyFields([])
   };
 
   return (
@@ -73,7 +75,9 @@ export const WorkoutContextProvider = ({ children }) => {
         setLoad,
         error,
         setError,
-        resetStates
+        resetStates,
+        setEmptyFields,
+        emptyFields
       }}
     >
       {children}

@@ -29,6 +29,12 @@ const getSingleWorkoutController = async (req, res) => {
 
 const createWorkoutController = async (req, res) => {
   const { title, reps, sets, load } = req.body;
+  let emptyFields = []
+  if(!title) emptyFields.push('title')
+  if(!load) emptyFields.push('loads')
+  if(!sets) emptyFields.push('sets')
+  if(!reps) emptyFields.push('reps')
+  if(emptyFields.length > 0) return res.status(400).json({error: 'Please fill out missing fields', emptyFields})
   try {
     const workout = await Workout.create({ title, reps, sets, load });
     res.status(200).json(workout);
@@ -38,8 +44,6 @@ const createWorkoutController = async (req, res) => {
       res.status(400).json({
         error: `${error.keyValue.title} workout already exists. Please try updating it.`,
       });
-      //Missing Workout Fields
-    else res.status(400).json({ error: "All fields are required" });
   }
   //Below line is Responsible for Error ==> Cannot set headers after they are sent to the client
   // res.json({ msg: "Create a new workout" });
