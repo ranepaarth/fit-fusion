@@ -102,27 +102,27 @@ const WorkoutsForm = () => {
 
       <FormInputTitle
         emptyFieldClass={
-          isEmptyField("title") ? "border-2 border-red-500" : "border-none"
+          isEmptyField("title") ? "empty-form-field" : ""
         }
       />
       <FormInputLoads
         emptyFieldClass={
-          isEmptyField("loads") ? "border-2 border-red-500" : "border-none"
+          isEmptyField("loads") ? "empty-form-field" : ""
         }
       />
       <FormInputSets
         emptyFieldClass={
-          isEmptyField("sets") ? "border-2 border-red-500" : "border-none"
+          isEmptyField("sets") ? "empty-form-field" : ""
         }
       />
       <FormInputReps
         emptyFieldClass={
-          isEmptyField("reps") ? "border-2 border-red-500" : "border-none"
+          isEmptyField("reps") ? "empty-form-field" : ""
         }
       />
 
       <div className="flex justify-center mt-5">
-        <button className="p-3 w-fit bg-blue-500 rounded hover:bg-opacity-80">
+        <button className="form-submit-btn">
           {isUpdating ? "Update Workout" : "Add Workout"}
         </button>
         <ToastContainer />
