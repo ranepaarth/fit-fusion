@@ -12,6 +12,24 @@ export const workoutReducer = (state, action) => {
       return {
         workouts: [action.payload, ...state.workouts],
       };
+
+    case "UPDATE_WORKOUT":
+      const { updatedWorkout, createdAt, id, updatedAt } = action.payload;
+      return {
+        workouts: state.workouts.map((workout) =>
+          workout._id === id
+            ? {
+                title: updatedWorkout.title,
+                reps: updatedWorkout.reps,
+                load: updatedWorkout.load,
+                sets: updatedWorkout.sets,
+                createdAt,
+                updatedAt,
+                _id:id,
+              }
+            : workout
+        ),
+      };
     case "DELETE_WORKOUT":
       return {
         workouts: state.workouts.filter(
@@ -33,15 +51,23 @@ export const WorkoutContextProvider = ({ children }) => {
   const [reps, setReps] = useState("");
   const [sets, setSets] = useState("");
   const [load, setLoad] = useState("");
-  const [emptyFields,setEmptyFields] = useState([]);
+  const [emptyFields, setEmptyFields] = useState([]);
   const [error, setError] = useState(null);
-
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [selectedWorkout, setSelectedWorkout] = useState(null);
   const fetchAllWorkouts = (workouts) => {
     return dispatch({ type: "SET_WORKOUTS", payload: workouts });
   };
 
   const fetchCreatedWorkout = (workout) => {
     return dispatch({ type: "CREATE_WORKOUT", payload: workout });
+  };
+
+  const updateWorkout = (updatedWorkout, createdAt, updatedAt, id) => {
+    return dispatch({
+      type: "UPDATE_WORKOUT",
+      payload: { id, createdAt, updatedAt, updatedWorkout },
+    });
   };
 
   const deleteSingleWorkout = (workoutId) => {
@@ -55,7 +81,9 @@ export const WorkoutContextProvider = ({ children }) => {
     setLoad("");
     setSets("");
     setReps("");
-    setEmptyFields([])
+    setEmptyFields([]);
+    setSelectedWorkout(null);
+    setIsUpdating(false);
   };
 
   return (
@@ -77,7 +105,12 @@ export const WorkoutContextProvider = ({ children }) => {
         setError,
         resetStates,
         setEmptyFields,
-        emptyFields
+        emptyFields,
+        isUpdating,
+        setIsUpdating,
+        setSelectedWorkout,
+        selectedWorkout,
+        updateWorkout,
       }}
     >
       {children}
@@ -89,4 +122,4 @@ const useWorkoutContext = () => {
   return useContext(WorkoutContext);
 };
 
-export default useWorkoutContext
+export default useWorkoutContext;

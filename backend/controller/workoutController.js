@@ -66,7 +66,13 @@ const deleteWorkoutController = async (req, res) => {
 const updateWorkoutController = async (req, res) => {
   const { id } = req.params;
   const updatedObject = req.body;
-
+  const { title, reps, sets, load } = req.body;
+  let emptyFields = []
+  if(!title) emptyFields.push('title')
+  if(!load) emptyFields.push('loads')
+  if(!sets) emptyFields.push('sets')
+  if(!reps) emptyFields.push('reps')
+  if(emptyFields.length > 0) return res.status(400).json({error: 'Please fill out missing fields', emptyFields})
   try {
     const workout = await Workout.findByIdAndUpdate(
       { _id: id },

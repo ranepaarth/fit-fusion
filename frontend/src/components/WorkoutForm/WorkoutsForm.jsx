@@ -21,13 +21,16 @@ const WorkoutsForm = () => {
     setEmptyFields,
     emptyFields,
     fetchCreatedWorkout,
+    isUpdating,
+    selectedWorkout,
+    updateWorkout,
   } = useWorkoutContext();
 
   const showToastMessage = () => {
-    toast.success(`Workout Created !`, {
+    toast.success(isUpdating ? "Workout Updated !" : `Workout Created !`, {
       position: toast.POSITION.TOP_RIGHT,
-      autoClose:3000,
-      theme: 'colored'
+      autoClose: 3000,
+      theme: "colored",
     });
   };
 
@@ -56,6 +59,34 @@ const WorkoutsForm = () => {
     }
   };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const workout = { title, reps, sets, load };
+    const response = await fetch("/api/workout/" + selectedWorkout._id, {
+      method: "PATCH",
+      body: JSON.stringify(workout),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      setError(data.error);
+      setEmptyFields(data.emptyFields);
+    } else if (response.ok) {
+      console.log(workout);
+      resetStates();
+      showToastMessage();
+      updateWorkout(
+        workout,
+        selectedWorkout.createdAt,
+        selectedWorkout.updatedAt,
+        selectedWorkout._id
+      );
+      // fetchCreatedWorkout(data);
+    }
+  };
+
   const isEmptyField = (detail) => {
     return emptyFields.includes(detail);
   };
@@ -63,7 +94,7 @@ const WorkoutsForm = () => {
   return (
     <form
       className="w-full md:w-[40%] flex flex-col gap-y-2 capitalize sticky"
-      onSubmit={handleSubmit}
+      onSubmit={isUpdating ? handleUpdate : handleSubmit}
     >
       <h1 className="text-center text-2xl text-neutral-50">
         Create A New Workout
@@ -92,7 +123,7 @@ const WorkoutsForm = () => {
 
       <div className="flex justify-center mt-5">
         <button className="p-3 w-fit bg-blue-500 rounded hover:bg-opacity-80">
-          Add Workout
+          {isUpdating ? "Update Workout" : "Add Workout"}
         </button>
         <ToastContainer />
       </div>
