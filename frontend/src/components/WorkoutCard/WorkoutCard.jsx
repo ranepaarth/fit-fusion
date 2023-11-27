@@ -1,6 +1,5 @@
 import React from "react";
-import { MdDeleteForever } from "react-icons/md";
-import {FaRegEdit} from 'react-icons/fa'
+import { MdDeleteForever, MdEditOff, MdModeEditOutline } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -11,7 +10,18 @@ import {
 import WorkoutCreatedAt from "./WorkoutCreatedAt";
 
 const WorkoutCard = ({ workout }) => {
-  const { deleteSingleWorkout,setTitle,setSets,setLoad,setReps,setIsUpdating,setSelectedWorkout } = useWorkoutContext();
+  const {
+    deleteSingleWorkout,
+    setTitle,
+    setSets,
+    setLoad,
+    setReps,
+    setIsUpdating,
+    setSelectedWorkout,
+    title,
+    isUpdating,
+    resetStates,
+  } = useWorkoutContext();
   const showToastMessage = () => {
     toast.error(`Workout Deleted !`, {
       position: toast.POSITION.TOP_RIGHT,
@@ -30,32 +40,56 @@ const WorkoutCard = ({ workout }) => {
     }
   };
 
-const handleUpdate = () => {
-  setSelectedWorkout(workout)
-  setTitle(workout.title)
-  setLoad(workout.load)
-  setReps(workout.reps)
-  setSets(workout.sets)
-  setIsUpdating(true)
-}
+  const handleUpdate = () => {
+    setSelectedWorkout(workout);
+    setTitle(workout.title);
+    setLoad(workout.load);
+    setReps(workout.reps);
+    setSets(workout.sets);
+    setIsUpdating(true);
+  };
 
+  const cancelUpdate = () => {
+    resetStates();
+  };
   return (
-    <article className="bg-neutral-100 w-full py-2 px-4 rounded-md ">
+    <article
+      className={`bg-neutral-100 w-full py-2 px-4 rounded-md ${
+        isUpdating && title === workout?.title
+          ? "border-4 border-blue-500 shadow-sm"
+          : "border-4 border-transparent"
+      }`}
+    >
       <ToastContainer />
       <header className="flex items-center justify-between">
         <WorkoutTitle title={workout?.title} />
         <span className="flex gap-x-3">
-          <p className="bg-blue-200 p-1 rounded-full border-blue-500 border-2 hover:scale-105 cursor-pointer" onClick={()=>handleUpdate()} onKeyDown={()=>handleUpdate()}>
-            <FaRegEdit className="text-blue-500"/>
-          </p>
+          {setIsUpdating && title === workout?.title ? (
+            <p
+              className="edit-btn"
+              onClick={cancelUpdate}
+              onKeyDown={cancelUpdate}
+              title="Cancel Update"
+            >
+              <MdEditOff/>
+            </p>
+          ) : (
+            <p
+              className="edit-btn"
+              onClick={handleUpdate}
+              onKeyDown={handleUpdate}
+              title="Edit"
+            >
+              <MdModeEditOutline/>
+            </p>
+          )}
           <p
-            className="bg-red-200 p-1 rounded-full border-red-500 border-2 hover:scale-105 cursor-pointer"
+            className="delete-btn"
             title="Delete"
-            onClick={() => deleteWorkout(workout._id)} onKeyDown={()=>deleteWorkout(workout._id)}
+            onClick={() => deleteWorkout(workout._id)}
+            onKeyDown={() => deleteWorkout(workout._id)}
           >
-            <MdDeleteForever
-              className="text-red-600"
-            />
+            <MdDeleteForever/>
           </p>
         </span>
       </header>
@@ -64,10 +98,10 @@ const handleUpdate = () => {
         <WorkoutDetail name={"repetitions:"} value={workout?.reps} />
         <WorkoutDetail name={"sets:"} value={workout?.sets} />
       </div>
-      {/* <p className="text-neutral-400 text-base font-normal">
-        {moment(workout?.createdAt).format("DD-MM-YYYY HH:mm")}
-      </p> */}
-      <WorkoutCreatedAt createdAt={workout?.createdAt} />
+      <WorkoutCreatedAt
+        createdAt={workout?.createdAt}
+        updatedAt={workout?.updatedAt}
+      />
     </article>
   );
 };

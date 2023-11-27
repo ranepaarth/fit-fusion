@@ -8,16 +8,17 @@ const FormInputTitle = ({emptyFieldClass}) => {
     titleRef.current.focus();
   }, []);
   return (
-    <>
-      <label className="font-medium text-lg ">exercise title:</label>
+    <div className="form-single-field">
+      <label className="form-label">exercise title:</label>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        placeholder="Bench Press"
         ref={titleRef}
-        className={`outline-none bg-neutral-100 h-10 rounded-md text-blue-700 px-5 py-2 text-lg capitalize focus-within: outline-2 focus-within:outline-blue-600 focus-within:border-none ${emptyFieldClass} ${title?"border-none ":""}`}
+        className={`form-input-field  ${emptyFieldClass} ${title?"border-none ":""}`}
       />
-    </>
+    </div>
   );
 };
 
