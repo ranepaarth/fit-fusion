@@ -96,7 +96,7 @@ const WorkoutsForm = () => {
       className="w-full md:w-[40%] flex flex-col gap-y-5 capitalize"
       onSubmit={isUpdating ? handleUpdate : handleSubmit}
     >
-      <h1 className="text-center text-2xl text-neutral-50">
+      <h1 className="text-center text-2xl text-blue-500">
         Create A New Workout
       </h1>
 

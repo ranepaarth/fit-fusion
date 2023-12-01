@@ -7,7 +7,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  background-color: #242424;
+  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,44 +15,73 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@layer components{
-  .edit-btn{
-    @apply text-blue-500 bg-blue-200 p-1 rounded-full border-blue-500 border-2 hover:scale-105 cursor-pointer
-  }
+/* body {
+  background: rgb(210, 209, 209);
+} */
 
-  .delete-btn{
-    @apply text-red-600 bg-red-200 p-1 rounded-full border-red-500 border-2 hover:scale-105 cursor-pointer
-  }
-
-  .form-single-field{
-    @apply flex items-center justify-between md:flex-col md:items-start xl:flex-row xl:justify-between xl:items-center
-  }
-  .form-input-field{
-    @apply outline-none w-[70%] md:w-full xl:w-[75%] bg-neutral-100 h-10 rounded-md text-blue-700 px-5 py-2 text-lg capitalize placeholder:text-neutral-500
-  }
-
-  .form-input-field:focus-within{
-    @apply outline-2 outline-blue-600 border-none
-  }
-
-  .empty-form-field{
-    @apply outline-2 outline-red-500
-  }
-
-  .form-submit-btn{
-    @apply p-3 w-fit text-neutral-50 bg-blue-500 rounded hover:bg-opacity-80
-  }
-
-  .error-msg-block{
-    @apply text-red-500 bg-red-200 border-2 border-red-500 p-3 mt-2 rounded
-  }
-
-  .form-label{
-    @apply font-medium text-lg text-neutral-50
-  }
-
-  .logo-name{
-    @apply text-4xl font-bold cursor-pointer hidden md:block text-neutral-50
-  }
+*{
+  @apply transition-colors duration-100
 }
 
+@layer components {
+  .root-layout {
+    @apply h-full dark:bg-neutral-500 bg-neutral-800;
+  }
+  .navbar-style {
+    @apply dark:bg-neutral-700 bg-neutral-200 h-20 flex items-center px-[5%] lg:px-[5%];
+  }
+  .edit-btn {
+    @apply text-blue-500 bg-blue-200 p-1 rounded-full border-blue-500 border-2 hover:scale-105 cursor-pointer;
+  }
+
+  .delete-btn {
+    @apply text-red-600 bg-red-200 p-1 rounded-full border-red-500 border-2 hover:scale-105 cursor-pointer;
+  }
+
+  .form-single-field {
+    @apply flex items-center justify-between md:flex-col md:items-start xl:flex-row xl:justify-between xl:items-center;
+  }
+  .form-input-field {
+    @apply outline-none w-[70%] md:w-full xl:w-[75%] bg-neutral-300 dark:bg-neutral-100 h-10 rounded-md text-blue-700 px-5 py-2 text-lg capitalize placeholder:text-neutral-500;
+  }
+
+  .form-input-field:focus-within {
+    @apply outline-2 outline-blue-600 border-none;
+  }
+
+  .empty-form-field {
+    @apply outline-2 outline-red-500;
+  }
+
+  .form-submit-btn {
+    @apply p-3 w-fit text-neutral-50 bg-blue-500 rounded hover:bg-opacity-80;
+  }
+
+  .error-msg-block {
+    @apply text-red-500 bg-red-200 border-2 border-red-500 p-3 mt-2 rounded;
+  }
+
+  .form-label {
+    @apply font-medium text-lg dark:text-neutral-50;
+  }
+
+  .logo-name {
+    @apply text-4xl font-bold cursor-pointer hidden md:block dark:text-neutral-50 text-blue-400;
+  }
+
+  .workout-card-body {
+    @apply bg-neutral-300 dark:bg-neutral-100 w-full py-2 px-4 rounded-md;
+  }
+
+  .workout-card-footer {
+    @apply flex md:flex-col xl:flex-row md:items-start items-center justify-between text-neutral-600 mt-5;
+  }
+
+  .sun-icon{
+    @apply text-2xl bg-yellow-200 text-yellow-500 p-2 rounded-full border-2 border-yellow-600 duration-0
+  }
+
+  .moon-icon{
+    @apply text-2xl bg-neutral-300 text-neutral-500 p-2 rounded-full border-2 border-neutral-600 duration-0
+  }
+}

@@ -54,16 +54,16 @@ const WorkoutCard = ({ workout }) => {
   };
   return (
     <article
-      className={`bg-neutral-100 w-full py-2 px-4 rounded-md ${
+      className={`workout-card-body ${
         isUpdating && title === workout?.title
           ? "border-4 border-blue-500 shadow-sm"
           : "border-4 border-transparent"
       }`}
     >
       <ToastContainer />
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between gap-x-2 line-clamp-2" title={workout?.title}>
         <WorkoutTitle title={workout?.title} />
-        <span className="flex gap-x-3">
+        <span className="flex gap-x-3 bg-neutral- p-1">
           {setIsUpdating && title === workout?.title ? (
             <p
               className="edit-btn"
@@ -93,7 +93,7 @@ const WorkoutCard = ({ workout }) => {
           </p>
         </span>
       </header>
-      <div className="flex md:flex-col xl:flex-row md:items-start items-center justify-between text-neutral-600 mt-5">
+      <div className="workout-card-footer">
         <WorkoutDetail name={"Load (kg):"} value={workout?.load} />
         <WorkoutDetail name={"repetitions:"} value={workout?.reps} />
         <WorkoutDetail name={"sets:"} value={workout?.sets} />
