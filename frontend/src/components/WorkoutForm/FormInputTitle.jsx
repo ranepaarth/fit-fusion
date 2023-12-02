@@ -16,7 +16,7 @@ const FormInputTitle = ({emptyFieldClass}) => {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Bench Press"
         ref={titleRef}
-        className={`form-input-field  ${emptyFieldClass} ${title?"border-none ":""}`}
+        className={`form-input-field  ${emptyFieldClass} ${title?"outline-none ":""}`}
       />
     </div>
   );

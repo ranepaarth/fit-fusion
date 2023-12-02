@@ -25,8 +25,9 @@
 
 @layer components {
   .root-layout {
-    @apply dark:bg-neutral-500 bg-neutral-800;
+    @apply  dark:bg-neutral-500 bg-neutral-800;
   }
+
   .navbar-style {
     @apply dark:bg-neutral-700 bg-neutral-200 h-20 flex items-center px-[5%] lg:px-[5%];
   }
@@ -77,6 +78,10 @@
     @apply flex md:flex-col xl:flex-row md:items-start items-center justify-between text-neutral-600 mt-5;
   }
 
+  .workout-card-createdAt {
+    @apply text-neutral-400 text-base font-normal flex items-center gap-1
+  }
+
   .sun-icon{
     @apply text-2xl bg-yellow-200 text-yellow-500 p-2 rounded-full border-2 border-yellow-600 duration-0
   }
@@ -86,6 +91,6 @@
   }
 
   .footer{
-    @apply flex justify-center p-2 dark:bg-neutral-700 dark:text-neutral-100 bg-neutral-100 text-neutral-500
+    @apply absolute bottom-0 w-full text-center p-2 dark:bg-neutral-700 dark:text-neutral-100 bg-neutral-100 text-neutral-500
   }
 }

@@ -26,6 +26,8 @@ const WorkoutsForm = () => {
     updateWorkout,
   } = useWorkoutContext();
 
+  console.log(title)
+
   const showToastMessage = () => {
     toast.success(isUpdating ? "Workout Updated !" : `Workout Created !`, {
       position: toast.POSITION.TOP_RIGHT,
@@ -93,7 +95,7 @@ const WorkoutsForm = () => {
 
   return (
     <form
-      className="w-full md:w-[40%] flex flex-col gap-y-5 capitalize"
+      className="w-full md:w-[40%] flex flex-col gap-y-5 capitalize mb-8"
       onSubmit={isUpdating ? handleUpdate : handleSubmit}
     >
       <h1 className="text-center text-2xl text-blue-500">
@@ -102,7 +104,7 @@ const WorkoutsForm = () => {
 
       <FormInputTitle
         emptyFieldClass={
-          isEmptyField("title") ? "empty-form-field" : ""
+          isEmptyField("title") ? "empty-form-field" : "outline-none"
         }
       />
       <FormInputLoads

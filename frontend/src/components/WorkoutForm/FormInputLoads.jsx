@@ -11,7 +11,7 @@ const FormInputLoads = ({emptyFieldClass}) => {
         value={load}
         placeholder="40"
         onChange={(e) => setLoad(e.target.value)}
-        className={`form-input-field ${emptyFieldClass} ${load?"border-none":""}`}
+        className={`form-input-field ${emptyFieldClass} ${load?"outline-none":""}`}
       />
     </div>
   );

@@ -11,7 +11,7 @@ const FormInputReps = ({emptyFieldClass}) => {
         value={reps}
         onChange={(e) => setReps(e.target.value)}
         placeholder="20"
-        className={`form-input-field ${emptyFieldClass} ${reps?"border-none ":""}`}
+        className={`form-input-field ${emptyFieldClass} ${reps?"outline-none ":""}`}
       />
     </div>
   );

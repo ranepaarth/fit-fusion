@@ -11,7 +11,7 @@ const FormInputSets = ({emptyFieldClass}) => {
         value={sets}
         onChange={(e) => setSets(e.target.value)}
         placeholder="4"
-        className={`form-input-field ${emptyFieldClass} ${sets?"border-none ":""}`}
+        className={`form-input-field ${emptyFieldClass} ${sets?"outline-none ":""}`}
       />
     </div>
   );
