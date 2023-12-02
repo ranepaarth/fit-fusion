@@ -25,7 +25,7 @@
 
 @layer components {
   .root-layout {
-    @apply h-full dark:bg-neutral-500 bg-neutral-800;
+    @apply dark:bg-neutral-500 bg-neutral-800;
   }
   .navbar-style {
     @apply dark:bg-neutral-700 bg-neutral-200 h-20 flex items-center px-[5%] lg:px-[5%];
@@ -83,5 +83,9 @@
 
   .moon-icon{
     @apply text-2xl bg-neutral-300 text-neutral-500 p-2 rounded-full border-2 border-neutral-600 duration-0
+  }
+
+  .footer{
+    @apply flex justify-center p-2 dark:bg-neutral-700 dark:text-neutral-100 bg-neutral-100 text-neutral-500
   }
 }
