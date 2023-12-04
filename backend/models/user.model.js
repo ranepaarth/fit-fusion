@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.signup = async function (firstName, userName, password) {
   //email and password validation
 
-  if (!userName || !password) {
+  if (!firstName || !userName || !password) {
     throw Error("All fields are required");
   }
 
@@ -52,6 +52,27 @@ userSchema.statics.signup = async function (firstName, userName, password) {
   const user = await this.create({ firstName, userName, password: hash });
 
   return user;
+};
+
+userSchema.statics.login = async function (firstName, userName, password) {
+  if (!firstName || !userName || !password) {
+    throw Error("All fields are required");
+  }
+
+  const user = await this.findOne({userName})
+
+  if(!user) throw Error('Incorrect username')
+
+  //comparing the input PWD and already existing PWS in the database 
+
+  //Done by first retrieving the user using the findOne({}) method wherein we have passed email as a key
+
+  //compare() method returns BOOLEAN
+  const match = await bcrypt.compare(password, user.password)
+
+  if(!match) throw Error('Incorrect Password')
+
+  return user
 };
 
 module.exports = mongoose.model("User", userSchema);
