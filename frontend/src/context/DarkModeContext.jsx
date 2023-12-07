@@ -1,38 +1,34 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useState} from "react";
 
 const DarkModeContext = createContext();
 
-const darkModeReducer = (state, action) => {
-  switch (action.type) {
-    case "TOGGLE_DARK_MODE":
-      return {
-        darkMode: !state.darkMode,
-      };
-
-    default:
-      return state;
-  }
-};
-
-const getDarkMode = () =>{
-  return localStorage.getItem("darkMode");
-}
-console.log(getDarkMode() )
-const darkModeState = {
-  darkMode: getDarkMode(),
-};
-
-console.log(darkModeState.darkMode)
 export const DarkModeContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(darkModeReducer, darkModeState);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") setDarkMode(true);
+    else if (theme === "light") setDarkMode(false);
+  }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   const toggleDarkMode = () => {
-    localStorage.setItem('darkMode', state.darkMode)
-    return dispatch({ type: "TOGGLE_DARK_MODE" });
-  };
+    setDarkMode(prev => !prev)
+  }
 
   return (
-    <DarkModeContext.Provider value={{ ...state, toggleDarkMode }}>
+    <DarkModeContext.Provider value={{darkMode, toggleDarkMode }}>
       {children}
     </DarkModeContext.Provider>
   );
