@@ -6,7 +6,7 @@ const FormWorkoutError = () => {
     const {error} = useWorkoutContext()
   return (
     <span
-        className={`error-msg-block flex items-center gap-2 ${
+        className={`error-msg-block flex justify-center items-center gap-2 ${
           error === null ? "hidden" : "block"
         }`}
       >
