@@ -5,7 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server:{
     proxy:{
-      '/api/workout': 'http://localhost:4000'
+      '/api/workout': 'http://localhost:4000',
+      '/api/user':'http://localhost:4000'
     }
   },
   plugins: [react()],
