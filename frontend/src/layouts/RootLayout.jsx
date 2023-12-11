@@ -1,18 +1,23 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import Footer from "../components/Footer";
-import { Navbar } from "../componentsRoute";
-import useDarkModeContext from "../context/DarkModeContext";
+import { Outlet, useLocation } from "react-router-dom";
+import { Footer, Navbar, useDarkModeContext } from "../componentsRoute";
 
 const RootLayout = () => {
   const { darkMode } = useDarkModeContext();
-  console.log(darkMode);
+  const { pathname } = useLocation();
+  const page = pathname.split("/").filter((item) => item !== "")[0];
   return (
-    <div className={`${darkMode ? "dark root-layout" : ""} relative min-h-screen`}>
+    <div className={`relative min-h-screen`}>
       <Navbar />
-      <main className="pb-14">
-        <Outlet />
-      </main>
+      {page === "signup" || page === "login" ? (
+        <main className="flex items-center justify-center py-20 px-10">
+          <Outlet />
+        </main>
+      ) : (
+        <main className="pb-14">
+          <Outlet />
+        </main>
+      )}
       <Footer />
     </div>
   );
