@@ -3,11 +3,11 @@ import { MdDeleteForever, MdEditOff, MdModeEditOutline } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  WorkoutCreatedAt,
   WorkoutDetail,
   WorkoutTitle,
   useWorkoutContext,
 } from "../../componentsRoute";
-import WorkoutCreatedAt from "./WorkoutCreatedAt";
 
 const WorkoutCard = ({ workout }) => {
   const {
