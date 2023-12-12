@@ -9,6 +9,10 @@ const {
   updateWorkoutController,
 } = require("../controller/workoutController");
 
+const { requireAuth } = require("../middleware/requireAuth");
+
+router.use(requireAuth);
+
 router.get("/", getAllWorkoutsController).post("/", createWorkoutController);
 
 router
