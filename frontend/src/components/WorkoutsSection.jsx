@@ -4,13 +4,19 @@ import {
   WorkoutCard,
   useWorkoutContext,
 } from "../componentsRoute";
+import { useAuthContext } from "../context/AuthContext";
 const WorkoutsSection = () => {
   // const [workouts, setWorkouts] = useState(null);
   const { workouts, fetchAllWorkouts } = useWorkoutContext();
+  const {user} = useAuthContext()
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
-        const response = await fetch("/api/workout");
+        const response = await fetch("/api/workout",{
+          headers:{
+            'Authorization': `Bearer ${user?.jwtToken}`
+          }
+        });
 
         const data = await response.json();
 
@@ -23,16 +29,16 @@ const WorkoutsSection = () => {
         console.log(error)
       }
     };
-    fetchWorkouts();
-  }, []);
+    if(user) fetchWorkouts();
+  }, [user]);
 
   return (
     <section className="flex flex-col gap-4 w-full md:w-[50%]">
-      {workouts?.map((workout) => {
+      {user && workouts?.map((workout) => {
         return <WorkoutCard workout={workout} key={workout._id} />;
       })}
 
-      {workouts?.length === 0 ? <EmptyWorkoutCard /> : ""}
+      {!user? <EmptyWorkoutCard /> : ""}
     </section>
   );
 };

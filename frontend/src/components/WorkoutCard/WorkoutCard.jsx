@@ -8,6 +8,7 @@ import {
   WorkoutTitle,
   useWorkoutContext,
 } from "../../componentsRoute";
+import { useAuthContext } from "../../context/AuthContext";
 
 const WorkoutCard = ({ workout }) => {
   const {
@@ -22,6 +23,8 @@ const WorkoutCard = ({ workout }) => {
     isUpdating,
     resetStates,
   } = useWorkoutContext();
+
+  const {user} = useAuthContext()
   const showToastMessage = () => {
     toast.error(`Workout Deleted !`, {
       position: toast.POSITION.TOP_RIGHT,
@@ -30,8 +33,12 @@ const WorkoutCard = ({ workout }) => {
     });
   };
   const deleteWorkout = async (id) => {
+    if(!user) return
     const response = await fetch("/api/workout/" + workout?._id, {
       method: "DELETE",
+      headers:{
+        'Authorization': `Bearer ${user?.jwtToken}`
+      }
     });
 
     if (response.ok) {

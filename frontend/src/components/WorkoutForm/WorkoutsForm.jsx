@@ -9,6 +9,7 @@ import {
   FormWorkoutError,
   useWorkoutContext,
 } from "../../componentsRoute";
+import { useAuthContext } from "../../context/AuthContext";
 
 const WorkoutsForm = () => {
   const {
@@ -26,7 +27,9 @@ const WorkoutsForm = () => {
     updateWorkout,
   } = useWorkoutContext();
 
-  console.log(title)
+  const { user } = useAuthContext();
+
+  console.log(title);
 
   const showToastMessage = () => {
     toast.success(isUpdating ? "Workout Updated !" : `Workout Created !`, {
@@ -38,18 +41,24 @@ const WorkoutsForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const workout = { title, load, reps, sets };
     const response = await fetch("/api/workout", {
       method: "POST",
       body: JSON.stringify(workout),
       headers: {
+        Authorization: `Bearer ${user?.jwtToken}`,
         "Content-Type": "application/json",
       },
     });
 
     //if the above request is successful we get json data as a response from the backend server as specified by us
     const data = await response.json();
-
+    if (!user) {
+      setError("You must be logged in");
+      resetStates();
+      return;
+    }
     //Same happens for an error response
     if (!response.ok) {
       setError(data.error);
@@ -63,12 +72,20 @@ const WorkoutsForm = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      setError("You must be logged in");
+      resetStates();
+      return;
+    }
+
     const workout = { title, reps, sets, load };
     const response = await fetch("/api/workout/" + selectedWorkout._id, {
       method: "PATCH",
       body: JSON.stringify(workout),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user?.jwtToken}`,
       },
     });
     const data = await response.json();
@@ -90,7 +107,7 @@ const WorkoutsForm = () => {
   };
 
   const isEmptyField = (detail) => {
-    return emptyFields.includes(detail);
+    return emptyFields?.includes(detail);
   };
 
   return (
@@ -108,23 +125,20 @@ const WorkoutsForm = () => {
         }
       />
       <FormInputLoads
-        emptyFieldClass={
-          isEmptyField("loads") ? "empty-form-field" : ""
-        }
+        emptyFieldClass={isEmptyField("loads") ? "empty-form-field" : ""}
       />
       <FormInputSets
-        emptyFieldClass={
-          isEmptyField("sets") ? "empty-form-field" : ""
-        }
+        emptyFieldClass={isEmptyField("sets") ? "empty-form-field" : ""}
       />
       <FormInputReps
-        emptyFieldClass={
-          isEmptyField("reps") ? "empty-form-field" : ""
-        }
+        emptyFieldClass={isEmptyField("reps") ? "empty-form-field" : ""}
       />
 
       <div className="flex justify-center mt-5">
-        <button className="form-submit-btn">
+        <button
+          className="form-submit-btn dark:disabled:bg-opacity-50 disabled:text-neutral-300 disabled:bg-opacity-90"
+          disabled={!user}
+        >
           {isUpdating ? "Update Workout" : "Add Workout"}
         </button>
         <ToastContainer />
