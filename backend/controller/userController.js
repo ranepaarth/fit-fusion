@@ -14,14 +14,14 @@ const getAllUsers = async (req, res) => {
 
 const loginUserController = async (req, res) => {
 
-  const {firstName,userName,password}= req.body
+  const {userName,password}= req.body
   try {
-    const user = await User.login(firstName, userName, password);
+    const user = await User.login(userName, password);
 
     //creating a JWT 
     const jwtToken = createToken(user._id)
-
-    res.status(200).json({ jwtToken,firstName, userName, user });
+    const firstName = user?.firstName
+    res.status(200).json({ jwtToken, userName,firstName});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -35,7 +35,7 @@ const signupUserController = async (req, res) => {
     //creating a JWT 
     const jwtToken = createToken(user._id)
 
-    res.status(200).json({ jwtToken,firstName, userName, user });
+    res.status(200).json({ jwtToken,firstName, userName });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
