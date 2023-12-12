@@ -5,7 +5,7 @@ const DarkModeToggleBtn = () => {
   const { darkMode, toggleDarkMode } = useDarkModeContext();
   return (
     <span
-      className="flex items-center gap-2 px-4 py-2 my-2 dark:text-neutral-200 text-blue-500 text-base cursor-pointer font-sans dark:hover:bg-neutral-800 hover:bg-blue-200"
+      className="flex items-center gap-2 px-4 py-2 dark:text-neutral-200 text-blue-500 text-base cursor-pointer font-sans dark:hover:bg-neutral-800 hover:bg-blue-100"
       title="Toggle Theme"
       onClick={toggleDarkMode}
       onKeyDown={toggleDarkMode}

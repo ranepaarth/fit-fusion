@@ -25,11 +25,11 @@ const Navbar = () => {
         <h1 className="logo-name">Fit Fusion</h1>
       </Link>
 
-      <span className="flex items-center gap-3">
+      <span className="flex items-center gap-3 transition-all duration-200">
         {user ? (
           <img
             src={`https://api.multiavatar.com/${user?.firstName}.png`}
-            className="w-12 cursor-pointer"
+            className="w-12 cursor-pointer border-2 border-transparent rounded-full focus:border-4 hover:border-blue-400"
             alt={<FaUser />}
             onClick={toggleShowOptions}
             onKeyDown={toggleShowOptions}
@@ -50,9 +50,9 @@ const Navbar = () => {
             onClick={toggleShowOptions}
             onKeyDown={toggleShowOptions}
           >
-            <div className="options absolute top-5 right-24 md:right-24 lg:right-28 xl:right-32 flex flex-col dark:bg-neutral-600 dark:border-px dark:border-neutral-300 shadow-black shadow-sm bg-blue-50 rounded-md transition-opacity z-30">
+            <div className="options absolute top-5 right-24 md:right-24 lg:right-28 xl:right-32 flex flex-col dark:bg-neutral-600 dark:border-px dark:border-neutral-300 shadow-black shadow-sm bg-white rounded-md z-30 py-2 transition-all duration-300">
               {user && (
-                <span className="dark:text-neutral-100 flex items-start gap-5 p-4">
+                <span className="dark:text-neutral-100 flex items-start gap-x-2 px-4 py-2">
                   {user ? (
                     <img
                       src={`https://api.multiavatar.com/${user?.firstName}.png`}
@@ -64,30 +64,32 @@ const Navbar = () => {
                       <FaUser />
                     </p>
                   )}
-                  <span className="flex flex-col gap-">
+                  <span className="flex flex-col gap-0">
                     <p className="text-lg font-medium capitalize text-blue-600 dark:text-neutral-200">
                       {user?.firstName}
                     </p>
-                    <p className="text-blue-400">{user?.userName}</p>
+                    <p className="text-blue-500">{user?.userName}</p>
                   </span>
                 </span>
               )}
               {user && (
-                <hr className="border-1 border-blue-300 dark:border-neutral-400" />
+                <hr className="border-t border-blue-300 dark:border-neutral-400 mb-2" />
               )}
-              <NavItem
-                path={"/"}
-                pageName={"My Workouts"}
-                Icon={<IoBarbell />}
-              />
-              <hr className="border-1 border-blue-300 dark:border-neutral-400 mt-2" />
               {user ? (
+              <>
                 <NavItem
                   path={"/"}
-                  pageName={"Log Out"}
-                  Icon={<LuLogOut />}
-                  handleClick={handleLogout}
+                  pageName={"My Workouts"}
+                  Icon={<IoBarbell />}
                 />
+                <hr className="border-t border-blue-300 dark:border-neutral-400 my-2" />
+                  <NavItem
+                    path={'/login'}
+                    pageName={"Log Out"}
+                    Icon={<LuLogOut />}
+                    handleClick={handleLogout}
+                  />
+              </>
               ) : (
                 <>
                   <NavItem
@@ -102,7 +104,7 @@ const Navbar = () => {
                   />
                 </>
               )}
-              <hr className="border-1 border-blue-300 dark:border-neutral-400 mt-2" />
+              <hr className="border-t border-blue-300 dark:border-neutral-400 my-2" />
               <DarkModeToggleBtn />
             </div>
           </div>
