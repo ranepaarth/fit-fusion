@@ -38,7 +38,7 @@ const WorkoutsSection = () => {
         return <WorkoutCard workout={workout} key={workout._id} />;
       })}
 
-      {!user? <EmptyWorkoutCard /> : ""}
+      {!user || workouts?.length === 0? <EmptyWorkoutCard /> : ""}
     </section>
   );
 };
