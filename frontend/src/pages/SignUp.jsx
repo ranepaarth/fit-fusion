@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaArrowRight, FaRegUser } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { MdLockOutline, MdOutlineMailOutline } from "react-icons/md";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Logo } from "../componentsRoute";
 import { useRefContext } from "../context/RefContext";
 
@@ -16,7 +16,6 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { user } = useAuthContext();
   const { signUp, error, success } = useSignUp();
-  const navigate = useNavigate();
   const ref = useRefContext();
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -37,7 +36,6 @@ const SignUp = () => {
     console.log(error);
     await signUp(name, userName, password);
     resetStates();
-    if(success) navigate('/login')
     // console.log(error, success);
   };
 
@@ -136,8 +134,8 @@ const SignUp = () => {
         )}
         {success ? (
           <span className="">
-            <p className="text-sm font-medium dark:text-neutral-200">Account Created Successfully
-            <NavLink to="/login" className='font-semibold px-2 text-blue-400 hover:underline'>Log In</NavLink>
+            <p className="text-sm font-medium dark:text-neutral-200 text-neutral-600">Account Created Successfully
+            <NavLink to="/login" className='font-semibold px-2 dark:text-blue-400 text-blue-500 hover:underline'>Log In</NavLink>
             </p>
           </span>
         ) : (

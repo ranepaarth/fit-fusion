@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { MdLockOutline, MdOutlineMailOutline } from "react-icons/md";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Logo } from "../componentsRoute";
 import { useAuthContext } from "../context/AuthContext";
 import { useRefContext } from "../context/RefContext";
@@ -14,7 +14,6 @@ const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { user } = useAuthContext();
   const { logIn, error, isLoading } = useLogIn();
-  const navigate = useNavigate();
   const ref = useRefContext();
   useEffect(() => {
     ref.current.focus();
@@ -27,7 +26,6 @@ const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await logIn(userName, password);
-    if (localStorage.getItem("user")) navigate("/");
   };
   return (
     <div className="user-form-container">
