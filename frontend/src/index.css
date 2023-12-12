@@ -15,22 +15,29 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* body {
-  background: rgb(210, 209, 209);
-} */
+* {
+  @apply transition-colors duration-100;
+}
 
-*{
-  @apply transition-colors duration-100
+body {
+  @apply dark:bg-neutral-800;
+}
+
+a.active {
+  @apply dark:bg-neutral-700 bg-blue-50;
 }
 
 @layer components {
-  .root-layout {
-    @apply  dark:bg-neutral-500 bg-neutral-800;
-  }
-
   .navbar-style {
     @apply dark:bg-neutral-700 bg-neutral-200 h-20 flex items-center px-[5%] lg:px-[5%];
   }
+  .logo-name {
+    @apply text-4xl font-bold cursor-pointer hidden md:block dark:text-neutral-50 text-blue-400;
+  }
+  .nav-item {
+    @apply font-medium p-2 dark:text-neutral-200 text-blue-500  dark:hover:bg-neutral-800 hover:bg-blue-100 duration-300;
+  }
+
   .edit-btn {
     @apply text-blue-500 bg-blue-200 p-1 rounded-full border-blue-500 border-2 hover:scale-105 cursor-pointer;
   }
@@ -42,6 +49,7 @@
   .form-single-field {
     @apply flex items-center justify-between md:flex-col md:items-start xl:flex-row xl:justify-between xl:items-center;
   }
+
   .form-input-field {
     @apply outline-none w-[70%] md:w-full xl:w-[75%] bg-neutral-300 dark:bg-neutral-100 h-10 rounded-md text-blue-700 px-5 py-2 text-lg capitalize placeholder:text-neutral-500;
   }
@@ -61,13 +69,12 @@
   .error-msg-block {
     @apply text-red-500 bg-red-200 border-2 border-red-500 p-3 mt-2 rounded;
   }
-
-  .form-label {
-    @apply font-medium text-lg dark:text-neutral-50;
+  .success-msg-block {
+    @apply text-green-500 bg-green-200 border-2 border-green-500 p-3 mt-2 rounded;
   }
 
-  .logo-name {
-    @apply text-4xl font-bold cursor-pointer hidden md:block dark:text-neutral-50 text-blue-400;
+  .form-label {
+    @apply font-medium text-lg dark:text-neutral-50 text-neutral-600;
   }
 
   .workout-card-body {
@@ -79,18 +86,58 @@
   }
 
   .workout-card-createdAt {
-    @apply text-neutral-400 text-base font-normal flex items-center gap-1
+    @apply text-neutral-400 text-base font-normal flex items-center gap-1;
   }
 
-  .sun-icon{
-    @apply text-2xl bg-yellow-200 text-yellow-500 p-2 rounded-full border-2 border-yellow-600 duration-0
+  .sun-icon {
+    @apply text-2xl w-fit bg-yellow-200 text-yellow-500 p-2 rounded-full border-2 border-yellow-600 duration-0;
   }
 
-  .moon-icon{
-    @apply text-2xl bg-neutral-300 text-neutral-500 p-2 rounded-full border-2 border-neutral-600 duration-0
+  .moon-icon {
+    @apply text-2xl w-fit bg-neutral-300 text-neutral-500 p-2 rounded-full border-2 border-neutral-600 duration-0;
   }
 
-  .footer{
-    @apply absolute bottom-0 w-full text-center p-2 dark:bg-neutral-700 dark:text-neutral-100 bg-neutral-100 text-neutral-500
+  .user-form-container {
+    @apply rounded-lg dark:bg-neutral-600 bg-neutral-100 dark:border-none h-fit  border-2 p-6;
+  }
+
+  .user-form-body {
+    @apply flex flex-col gap-y-5 h-fit;
+  }
+
+  .user-form-header {
+    @apply text-center text-2xl font-bold text-blue-500;
+  }
+
+  .user-input-row {
+    @apply flex items-center mt-6;
+  }
+
+  .user-input-label {
+    @apply text-2xl text-blue-400;
+  }
+
+  .user-input-container {
+    @apply w-full border-b-2 px-3 py-1 ml-4 focus-within:border-blue-500;
+  }
+
+  .user-input-password {
+    @apply flex items-center justify-between;
+  }
+
+  .user-input {
+    @apply border-none outline-none bg-transparent dark:text-neutral-200 text-blue-600 text-lg font-medium w-full;
+  }
+
+  .password-toggle-btn{
+    @apply text-lg text-blue-400 hover:scale-110
+  }
+
+  .user-form-btn{
+    @apply flex items-center justify-center gap-x-3 text-lg py-2 bg-blue-500 hover:bg-opacity-80 rounded-md text-neutral-200 font-medium mt-8
+  }
+
+  .footer {
+    @apply absolute bottom-0 w-full text-center p-2 dark:bg-neutral-700 dark:text-neutral-100 bg-neutral-100 text-neutral-500;
   }
 }
