@@ -1,8 +1,9 @@
 const Workout = require("../models/workout.model");
 const mongoose = require("mongoose");
 const getAllWorkoutsController = async (req, res) => {
+  const user_id = req.user._id
   try {
-    const workout = await Workout.find({}).sort({ createdAt: -1 });
+    const workout = await Workout.find({user_id}).sort({ createdAt: -1 });
     res.status(200).json(workout);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -16,7 +17,7 @@ const getSingleWorkoutController = async (req, res) => {
     // res.status(404).json({ error: `Workout not found` }); ref:line-20
     const workout = await Workout.findById({ _id: id });
     if (!workout)
-    //valid id but not existing
+      //valid id but not existing
       res.status(404).json({ error: `The  provided id does not exist` });
     else res.status(200).json(workout);
   } catch (error) {
@@ -29,14 +30,19 @@ const getSingleWorkoutController = async (req, res) => {
 
 const createWorkoutController = async (req, res) => {
   const { title, reps, sets, load } = req.body;
-  let emptyFields = []
-  if(!title) emptyFields.push('title')
-  if(!load) emptyFields.push('loads')
-  if(!sets) emptyFields.push('sets')
-  if(!reps) emptyFields.push('reps')
-  if(emptyFields.length > 0) return res.status(400).json({error: 'Please fill out missing fields', emptyFields})
+  let emptyFields = [];
+  if (!title) emptyFields.push("title");
+  if (!load) emptyFields.push("loads");
+  if (!sets) emptyFields.push("sets");
+  if (!reps) emptyFields.push("reps");
+  if (emptyFields.length > 0)
+    return res
+      .status(400)
+      .json({ error: "Please fill out missing fields", emptyFields });
   try {
-    const workout = await Workout.create({ title, reps, sets, load });
+    const user_id = req.user._id;
+    console.log(user_id,"\n",req.user._id)
+    const workout = await Workout.create({ title, reps, sets, load, user_id });
     res.status(200).json(workout);
   } catch (error) {
     //Existing Workout with the same title
@@ -54,7 +60,7 @@ const deleteWorkoutController = async (req, res) => {
   try {
     const workout = await Workout.findByIdAndDelete({ _id: id });
     if (!workout)
-    //Valid id but not existing
+      //Valid id but not existing
       res.status(404).json({ error: `The  provided id does not exist` });
     else res.status(200).json(workout);
   } catch (error) {
@@ -67,19 +73,22 @@ const updateWorkoutController = async (req, res) => {
   const { id } = req.params;
   const updatedObject = req.body;
   const { title, reps, sets, load } = req.body;
-  let emptyFields = []
-  if(!title) emptyFields.push('title')
-  if(!load) emptyFields.push('loads')
-  if(!sets) emptyFields.push('sets')
-  if(!reps) emptyFields.push('reps')
-  if(emptyFields.length > 0) return res.status(400).json({error: 'Please fill out missing fields', emptyFields})
+  let emptyFields = [];
+  if (!title) emptyFields.push("title");
+  if (!load) emptyFields.push("loads");
+  if (!sets) emptyFields.push("sets");
+  if (!reps) emptyFields.push("reps");
+  if (emptyFields.length > 0)
+    return res
+      .status(400)
+      .json({ error: "Please fill out missing fields", emptyFields });
   try {
     const workout = await Workout.findByIdAndUpdate(
       { _id: id },
       { $set: updatedObject }
     );
     if (!workout)
-    //valid id but not existing
+      //valid id but not existing
       res.status(404).json({ error: `The  provided id does not exist` });
     else res.status(200).json(workout);
   } catch (error) {
@@ -91,7 +100,7 @@ const updateWorkoutController = async (req, res) => {
         error:
           "Workout with same title already exists. Please try updating it.",
       });
-      //invalid id
+    //invalid id
     else if (error.kind === "ObjectId")
       res.status(404).json({
         error: `Workout with id:${id} does not exist. Please try again with a valid id.`,
