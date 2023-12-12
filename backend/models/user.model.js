@@ -41,7 +41,7 @@ userSchema.statics.signup = async function (firstName, userName, password) {
 
   // validating user by searching if the username already exists
   if (exists) {
-    throw new Error("userName already exists");
+    throw new Error("Username already exists\nPlease try Logging in");
   }
 
   //if not then we will hash the password and store it in the database
@@ -54,25 +54,25 @@ userSchema.statics.signup = async function (firstName, userName, password) {
   return user;
 };
 
-userSchema.statics.login = async function (firstName, userName, password) {
-  if (!firstName || !userName || !password) {
+userSchema.statics.login = async function (userName, password) {
+  if (!userName || !password) {
     throw Error("All fields are required");
   }
 
-  const user = await this.findOne({userName})
+  const user = await this.findOne({ userName });
 
-  if(!user) throw Error('Incorrect username')
+  if (!user) throw Error("Incorrect username");
 
   //comparing the input PWD and already existing PWS in the database 
 
   //Done by first retrieving the user using the findOne({}) method wherein we have passed email as a key
 
   //compare() method returns BOOLEAN
-  const match = await bcrypt.compare(password, user.password)
+  const match = await bcrypt.compare(password, user.password);
 
-  if(!match) throw Error('Incorrect Password')
+  if (!match) throw Error("Incorrect Password");
 
-  return user
+  return user;
 };
 
 module.exports = mongoose.model("User", userSchema);
