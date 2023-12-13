@@ -75,7 +75,7 @@ const WorkoutsForm = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-
+    console.log('inside handleUpdate')
     if (!user) {
       setError("You must be logged in");
       resetStates();
@@ -98,8 +98,11 @@ const WorkoutsForm = () => {
     if (!response.ok) {
       setError(data.error);
       setEmptyFields(data.emptyFields);
+      console.log('response not ok')
+      console.log(error)
     } else if (response.ok) {
       console.log(workout);
+      console.log('response ok')
       resetStates();
       showToastMessage();
       updateWorkout(
@@ -108,6 +111,8 @@ const WorkoutsForm = () => {
         selectedWorkout.updatedAt,
         selectedWorkout._id
       );
+      console.log(isUpdating)
+      console.log('outside handleUpdate')
       // fetchCreatedWorkout(data);
     }
   };
