@@ -6,8 +6,8 @@ const app = express();
 const workoutRouter = require("./router/workoutRouter");
 const userRouter = require("./router/userRouter");
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use("/api/workout", workoutRouter);
 app.use("/api/user", userRouter);
 
