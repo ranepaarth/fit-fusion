@@ -24,7 +24,7 @@ const WorkoutCard = ({ workout }) => {
     resetStates,
   } = useWorkoutContext();
 
-  const {user} = useAuthContext()
+  const { user } = useAuthContext();
   const showToastMessage = () => {
     toast.error(`Workout Deleted !`, {
       position: toast.POSITION.TOP_RIGHT,
@@ -33,13 +33,16 @@ const WorkoutCard = ({ workout }) => {
     });
   };
   const deleteWorkout = async (id) => {
-    if(!user) return
-    const response = await fetch("/api/workout/" + workout?._id, {
-      method: "DELETE",
-      headers:{
-        'Authorization': `Bearer ${user?.jwtToken}`
+    if (!user) return;
+    const response = await fetch(
+      `${import.meta.env.VITE_API_LINK}/api/workout/${workout?._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user?.jwtToken}`,
+        },
       }
-    });
+    );
 
     if (response.ok) {
       showToastMessage();
@@ -68,7 +71,10 @@ const WorkoutCard = ({ workout }) => {
       }`}
     >
       <ToastContainer />
-      <header className="flex items-center justify-between gap-x-2 line-clamp-2" title={workout?.title}>
+      <header
+        className="flex items-center justify-between gap-x-2 line-clamp-2"
+        title={workout?.title}
+      >
         <WorkoutTitle title={workout?.title} />
         <span className="flex gap-x-3 bg-neutral- p-1">
           {setIsUpdating && title === workout?.title ? (
@@ -78,7 +84,7 @@ const WorkoutCard = ({ workout }) => {
               onKeyDown={cancelUpdate}
               title="Cancel Update"
             >
-              <MdEditOff/>
+              <MdEditOff />
             </p>
           ) : (
             <p
@@ -87,7 +93,7 @@ const WorkoutCard = ({ workout }) => {
               onKeyDown={handleUpdate}
               title="Edit"
             >
-              <MdModeEditOutline/>
+              <MdModeEditOutline />
             </p>
           )}
           <p
@@ -96,7 +102,7 @@ const WorkoutCard = ({ workout }) => {
             onClick={() => deleteWorkout(workout._id)}
             onKeyDown={() => deleteWorkout(workout._id)}
           >
-            <MdDeleteForever/>
+            <MdDeleteForever />
           </p>
         </span>
       </header>

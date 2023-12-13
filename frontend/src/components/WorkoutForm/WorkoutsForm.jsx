@@ -43,14 +43,17 @@ const WorkoutsForm = () => {
     e.preventDefault();
 
     const workout = { title, load, reps, sets };
-    const response = await fetch("/api/workout", {
-      method: "POST",
-      body: JSON.stringify(workout),
-      headers: {
-        Authorization: `Bearer ${user?.jwtToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_LINK}/api/workout`,
+      {
+        method: "POST",
+        body: JSON.stringify(workout),
+        headers: {
+          Authorization: `Bearer ${user?.jwtToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     //if the above request is successful we get json data as a response from the backend server as specified by us
     const data = await response.json();
@@ -80,14 +83,17 @@ const WorkoutsForm = () => {
     }
 
     const workout = { title, reps, sets, load };
-    const response = await fetch("/api/workout/" + selectedWorkout._id, {
-      method: "PATCH",
-      body: JSON.stringify(workout),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user?.jwtToken}`,
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_LINK}/api/workout/${selectedWorkout._id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(workout),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.jwtToken}`,
+        },
+      }
+    );
     const data = await response.json();
     if (!response.ok) {
       setError(data.error);

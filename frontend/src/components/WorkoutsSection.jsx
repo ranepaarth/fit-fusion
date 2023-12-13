@@ -12,7 +12,7 @@ const WorkoutsSection = () => {
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
-        const response = await fetch("/api/workout",{
+        const response = await fetch(`${import.meta.env.VITE_API_LINK}/api/workout`,{
           headers:{
             'Authorization': `Bearer ${user?.jwtToken}`
           }
