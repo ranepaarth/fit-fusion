@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use("/api/workout", workoutRouter);
 app.use("/api/user", userRouter);
