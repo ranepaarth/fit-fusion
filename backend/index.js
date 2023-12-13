@@ -6,6 +6,11 @@ const app = express();
 const workoutRouter = require("./router/workoutRouter");
 const userRouter = require("./router/userRouter");
 
+app.use((req,res,next)=>{
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  next()
+})
 app.use(cors());
 app.use(express.json());
 app.use("/api/workout", workoutRouter);

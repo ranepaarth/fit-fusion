@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const router = express.Router();
 const {
   getAllWorkoutsController,
@@ -18,6 +18,6 @@ router.get("/", getAllWorkoutsController).post("/", createWorkoutController);
 router
   .get("/:id", getSingleWorkoutController)
   .delete("/:id", deleteWorkoutController)
-  .patch("/:id", updateWorkoutController);
+  .patch("/:id",cors(), updateWorkoutController);
 
 module.exports = router;
