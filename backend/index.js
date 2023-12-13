@@ -6,6 +6,10 @@ const workoutRouter = require("./router/workoutRouter");
 const userRouter = require("./router/userRouter");
 
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use("/api/workout", workoutRouter);
 app.use("/api/user", userRouter);
 
