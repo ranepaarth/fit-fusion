@@ -29,7 +29,7 @@ const WorkoutsForm = () => {
 
   const { user } = useAuthContext();
 
-  console.log(title);
+  // console.log(title);
 
   const showToastMessage = () => {
     toast.success(isUpdating ? "Workout Updated !" : `Workout Created !`, {
@@ -75,7 +75,7 @@ const WorkoutsForm = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log('inside handleUpdate')
+    // console.log('inside handleUpdate')
     if (!user) {
       setError("You must be logged in");
       resetStates();
@@ -101,7 +101,7 @@ const WorkoutsForm = () => {
       console.log('response not ok')
       console.log(error)
     } else if (response.ok) {
-      console.log(workout);
+      // console.log(workout);
       console.log('response ok')
       resetStates();
       showToastMessage();
@@ -111,8 +111,8 @@ const WorkoutsForm = () => {
         selectedWorkout.updatedAt,
         selectedWorkout._id
       );
-      console.log(isUpdating)
-      console.log('outside handleUpdate')
+      // console.log(isUpdating)
+      // console.log('outside handleUpdate')
       // fetchCreatedWorkout(data);
     }
   };

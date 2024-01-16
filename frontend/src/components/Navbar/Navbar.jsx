@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const toggleShowOptions = () => {
     // setShowOptions((prev) => !prev);
-    console.log("hello");
+    // console.log("hello");
   };
 
   const handleLogout = () => {

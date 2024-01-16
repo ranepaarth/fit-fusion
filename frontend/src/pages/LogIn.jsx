@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { LuCopy, LuCopyCheck } from "react-icons/lu";
+import { LuCopy } from "react-icons/lu";
 import { MdLockOutline, MdOutlineMailOutline } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { Logo } from "../componentsRoute";
@@ -26,13 +26,13 @@ const LogIn = () => {
   const handleEmailCopied = () => {
     setIsCopied(false);
     window.navigator.clipboard.writeText(emailRef.current?.innerText);
-    console.log(emailRef.current);
+    // console.log(emailRef.current);
     setIsCopied(true);
   };
   const handlePwdCopied = () => {
     setIsCopied(false);
     window.navigator.clipboard.writeText(pwdRef.current?.innerText);
-    console.log(pwdRef.current);
+    // console.log(pwdRef.current);
     setIsCopied(true);
   };
 
@@ -44,7 +44,7 @@ const LogIn = () => {
     e.preventDefault();
     await logIn(userName, password);
   };
-  console.log(isCopied);
+  // console.log(isCopied);
   return (
     <div className="user-form-container">
       <form className="user-form-body" onSubmit={handleSubmit}>
@@ -136,6 +136,8 @@ const LogIn = () => {
             </button>
           </span>
         </div>
+
+        {isLoading && <span className="loader"></span> }
 
         <button
           type="submit"

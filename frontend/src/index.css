@@ -27,6 +27,26 @@ a.active {
   @apply dark:bg-neutral-700 bg-blue-50;
 }
 
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgb(29, 78, 216);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
+
 @layer components {
   .navbar-style {
     @apply dark:bg-neutral-700 bg-neutral-200 h-20 flex items-center px-[5%] lg:px-[5%];

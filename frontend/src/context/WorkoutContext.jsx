@@ -71,7 +71,7 @@ export const WorkoutContextProvider = ({ children }) => {
   };
 
   const deleteSingleWorkout = (workoutId) => {
-    console.log(workoutId);
+    // console.log(workoutId);
     return dispatch({ type: "DELETE_WORKOUT", payload: workoutId });
   };
 

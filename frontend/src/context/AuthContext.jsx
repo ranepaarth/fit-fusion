@@ -32,7 +32,7 @@ const AuthContextProvider = ({ children }) => {
     }
   }, []);
 
-  console.log("AuthContext state: ", state);
+  // console.log("AuthContext state: ", state);
 
   const loginUser = (user) => {
     return dispatch({ type: "SIGNUP", payload: user });

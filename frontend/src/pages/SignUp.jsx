@@ -15,7 +15,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { user } = useAuthContext();
-  const { signUp, error, success } = useSignUp();
+  const { signUp, error, success, isLoading } = useSignUp();
   const ref = useRefContext();
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -127,15 +127,22 @@ const SignUp = () => {
             <FaArrowRight className="text-sm font-normal" />
           </span>
         </button>
-        {error && (
+        {!isLoading && !success && error && (
           <span className="error-msg-block">
             <p className="p-2">{error}</p>
           </span>
         )}
-        {success ? (
+        {!error && !success && isLoading && <span className="loader"></span>}
+        {!error && !isLoading && success ? (
           <span className="">
-            <p className="text-sm font-medium dark:text-neutral-200 text-neutral-600">Account Created Successfully
-            <NavLink to="/login" className='font-semibold px-2 dark:text-blue-400 text-blue-500 hover:underline'>Log In</NavLink>
+            <p className="text-sm font-medium dark:text-neutral-200 text-neutral-600">
+              Account Created Successfully
+              <NavLink
+                to="/login"
+                className="font-semibold px-2 dark:text-blue-400 text-blue-500 hover:underline"
+              >
+                Log In
+              </NavLink>
             </p>
           </span>
         ) : (
